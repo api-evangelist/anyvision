@@ -1,0 +1,87 @@
+generated: '2026-08-06'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=anyvision
+notes: >-
+  AnyVision/Oosto publishes no first-party API client SDK to any public package registry. The only
+  first-party packages found are three MIT-licensed front-end libraries published under the
+  @anyvision npm scope from the AnyVisionltd GitHub org, last released 2022-04-04. They are a design
+  system (React components, icons, style guide) for the company's own consoles — they are NOT API
+  client libraries, so this artifact carries a Packages pointer but deliberately does NOT carry an
+  SDKs pointer. The "SDK" Oosto markets on oosto.com/technology/ is an embedded native vision SDK for
+  camera and edge silicon partners, distributed under licence, not a published package.
+registries_probed:
+- registry: npm
+  query: anyvision
+  hits: 3
+- registry: npm
+  query: oosto
+  hits: 0
+- registry: pypi
+  name: anyvision
+  status: 404
+- registry: pypi
+  name: oosto
+  status: 404
+packages:
+- language: javascript
+  registry: npm
+  name: '@anyvision/anv-ui-components'
+  version: 1.0.0
+  description: Anyvision Components Library
+  url: https://www.npmjs.com/package/@anyvision/anv-ui-components
+  repository: https://github.com/AnyVisionltd/anv-ui-components
+  install: npm install @anyvision/anv-ui-components
+  license: MIT
+  last_published: '2022-04-04'
+  official: true
+  kind: ui-components
+  api_client: false
+- language: javascript
+  registry: npm
+  name: '@anyvision/anv-icons'
+  version: 1.0.0
+  description: Anyvision Icons Library
+  url: https://www.npmjs.com/package/@anyvision/anv-icons
+  repository: https://github.com/AnyVisionltd/anv-icons
+  install: npm install @anyvision/anv-icons
+  license: MIT
+  last_published: '2022-04-04'
+  official: true
+  kind: ui-components
+  api_client: false
+- language: javascript
+  registry: npm
+  name: '@anyvision/style-guide'
+  version: 1.0.4
+  description: Anyvision Style Guide Library
+  url: https://www.npmjs.com/package/@anyvision/style-guide
+  repository: https://github.com/AnyVisionltd/anv-ui-style-guide
+  install: npm install @anyvision/style-guide
+  license: MIT
+  last_published: '2022-04-04'
+  official: true
+  kind: ui-components
+  api_client: false
+sample_code:
+- language: javascript
+  name: oosto-api-sample-code (OnAccess 1.1.0, OnWatch 2.3.1 / 2.5.0)
+  url: https://github.com/AnyVisionltd/oosto-api-sample-code
+  official: true
+  kind: sample-code
+  note: >-
+    Vendor-published sample code, not a distributable package. Contains the only public evidence of
+    the OnWatch (/bt/api) and OnAccess (/abx/api) REST + Socket.IO surfaces. Depends on axios,
+    form-data and socket.io-client (JS) and requests + python-socketio (Python) — all third-party.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://registry.npmjs.org/@anyvision/anv-ui-components
+    status: 200
+  - url: https://registry.npmjs.org/@anyvision/anv-icons
+    status: 200
+  - url: https://registry.npmjs.org/@anyvision/style-guide
+    status: 200
+  - url: https://pypi.org/pypi/oosto/json
+    status: 404
+  - url: https://github.com/AnyVisionltd/oosto-api-sample-code
+    status: 200

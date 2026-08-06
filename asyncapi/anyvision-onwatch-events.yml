@@ -1,0 +1,66 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/AnyVisionltd/oosto-api-sample-code
+spec_type: event-catalog
+spec_published: none
+notes: >-
+  Oosto publishes no AsyncAPI document. It does ship a real, first-party-documented event surface:
+  OnWatch pushes detection events to subscribed clients over a Socket.IO channel, demonstrated in
+  both the JavaScript and Python sample code. This is a persistent socket stream, NOT HTTP webhook
+  callbacks — the Webhooks pointer marks the presence of an asynchronous event surface, and the
+  distinction is recorded here so nobody reads it as an HTTP callback contract. No AsyncAPI was
+  authored: fabricating one would assert a contract the vendor has not published.
+surface:
+  api: Oosto OnWatch API
+  transport: socket.io
+  protocol: websocket
+  url_pattern: https://<onwatch-server>/
+  socketio_path: /bt/api/socket.io
+  auth: bearer JWT supplied as a `token` query parameter on the handshake
+  transports_option: '["websocket"]'
+channels:
+- name: 'track:created'
+  direction: receive
+  description: >-
+    Emitted when OnWatch creates a track — a subject detected and tracked across the live camera
+    feeds. The payload shape is not published; both samples consume it opaquely (the JS sample logs
+    `Got track -` and the Python sample prints the raw data).
+  payload_schema: not-published
+  observed_in:
+  - OnWatch/2.5.0/js/exmaple-code-login-socket.js
+  - OnWatch/2.5.0/python/example-code-login-socket.py
+  - OnWatch/2.3.1/js/exmaple-code-login-socket.js
+lifecycle_events:
+- name: connect
+  kind: transport
+- name: disconnect
+  kind: transport
+- name: connect_error
+  kind: transport-error
+- name: connect_timeout
+  kind: transport-error
+- name: reconnect_error
+  kind: transport-error
+- name: reconnect_failed
+  kind: transport-error
+- name: error
+  kind: transport-error
+webhooks:
+  http_callbacks: not-documented-publicly
+  note: >-
+    No HTTP webhook registration endpoint, no signing secret and no delivery/retry contract appears
+    in any public Oosto material.
+gaps_for_the_provider:
+- No AsyncAPI 3.x document for the OnWatch event stream.
+- No published payload schema for track:created — an integrator cannot type the event without a
+  deployed system to observe.
+- No documented catalogue of the other events the socket emits; only track:created is demonstrated.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnWatch/2.5.0/js/exmaple-code-login-socket.js
+    status: 200
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnWatch/2.5.0/python/example-code-login-socket.py
+    status: 200
+  - url: https://oosto.com/asyncapi.yaml
+    status: 404

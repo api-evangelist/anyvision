@@ -1,0 +1,100 @@
+generated: '2026-08-06'
+method: searched
+source: https://oosto.com/why-trust-us/
+notes: >-
+  AnyVision/Oosto's published posture is regulatory and ethical rather than technical: it names the
+  biometric-privacy and data-protection regimes it operates under and publishes a dedicated EU AI Act
+  statement, but it publishes no third-party security certification (no SOC 2, ISO 27001, PCI DSS or
+  FedRAMP claim was found anywhere on the public site) and no API-level standards conformance. The
+  API-standard rows below are recorded as false because nothing in the public surface evidences them —
+  there is no OpenAPI, no OAuth server and no problem+json envelope to point at.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Both product APIs authenticate with a username/password login that returns a bearer JWT. No
+    authorization server, no /.well-known/oauth-authorization-server (404 on oosto.com).
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on oosto.com
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger document published on any probed host
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    A real Socket.IO event surface exists (see asyncapi/anyvision-onwatch-events.yml) but no AsyncAPI
+    document is published; /asyncapi.yaml returns 404
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No error envelope documented publicly
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on oosto.com
+- id: onvif
+  conforms: partial
+  evidence: >-
+    The AnyVisionltd GitHub org maintains a fork of Onvif_Discovery (WS-Discovery for ONVIF devices),
+    consistent with camera-side integration, but no ONVIF profile conformance is claimed on the site.
+regulatory:
+- id: eu-ai-act
+  posture: market-restriction
+  url: https://oosto.com/eu-artificial-intelligence-act/
+  statement: >-
+    "Oosto does not offer, sell or make available any of its products or services to customers in the
+    EU for the use of real time remote biometric identification systems in publicly accessible spaces
+    for the purposes of law enforcement or any of the other prohibited AI practices as outlined in
+    the EU Artificial Intelligence Act."
+  note: >-
+    This is a statement of non-participation in the prohibited-practice categories, not a conformity
+    assessment. No risk classification, notified body, or conformity assessment is published.
+- id: bipa
+  jurisdiction: Illinois, US
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+- id: cubi
+  jurisdiction: Texas, US
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+- id: washington-biometric-privacy
+  jurisdiction: Washington, US
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+- id: ccpa
+  jurisdiction: California, US
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+- id: pdpa
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+- id: lgpd
+  jurisdiction: Brazil
+  claimed: true
+  url: https://oosto.com/why-trust-us/
+certifications_published: []
+certifications_note: >-
+  No SOC 2, ISO 27001/27017/27018, PCI DSS, HIPAA, FedRAMP, CSA STAR or FIPS 140 claim was found.
+  probe-security-programs.py found no trust center (trust.oosto.com and security.oosto.com do not
+  resolve; oosto.com/trust returns 404), so no TrustCenter artifact was written.
+privacy_controls_published:
+- name: Face Blur
+  description: Blurs bystanders during video playback
+- name: Data Privacy Mode
+  description: Avoids recording individuals who are not enrolled
+- name: AES-256 encryption in transit
+  description: Optional encryption of facial data in transit
+ethics:
+  url: https://oosto.com/ai-ethics/
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://oosto.com/why-trust-us/
+    status: 200
+  - url: https://oosto.com/eu-artificial-intelligence-act/
+    status: 200
+  - url: https://oosto.com/trust/
+    status: 404
+  - url: https://oosto.com/.well-known/security.txt
+    status: 404
+  - url: https://oosto.com/asyncapi.yaml
+    status: 404

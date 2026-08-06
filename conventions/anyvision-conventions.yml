@@ -1,0 +1,100 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/AnyVisionltd/oosto-api-sample-code
+docs: https://knowledge.oosto.com/docs
+docs_access: gated
+notes: >-
+  Cross-cutting request/response semantics for the Oosto OnWatch (/bt/api) and OnAccess (/abx/api)
+  APIs, captured from the vendor's own public sample code. There is no published OpenAPI to derive
+  from and the reference documentation sits behind an OTP login, so only conventions that are
+  directly observable in first-party published code are recorded. Fields marked
+  `status: not-documented-publicly` are genuinely unknown — they are NOT asserted as absent.
+deployment_model:
+  kind: on-premise / edge / per-customer
+  base_url: none-public
+  detail: >-
+    Both APIs are served from the customer's own installation. The sample code uses the placeholder
+    host `kong.tls.ai` with the comment "REPLACE WITH SERVER IP OR RESOLVED DNS"; that host does not
+    resolve publicly. There is no vendor-hosted multi-tenant endpoint, which is why no baseURL is
+    recorded in apis.yml.
+  gateway: >-
+    The placeholder hostname (`kong.*`) and the product base paths suggest a Kong API gateway fronts
+    both product APIs in a reference deployment. Recorded as an observation from naming, not a
+    vendor claim.
+authentication:
+  style: bearer-jwt-from-password-login
+  header: 'Authorization: Bearer <token>'
+  artifact: authentication/anyvision-authentication.yml
+base_paths:
+- api: Oosto OnWatch
+  path: /bt/api
+  codename: Better Tomorrow (BT)
+- api: Oosto OnAccess
+  path: /abx/api
+  codename: Abraxas (ABX)
+content_types:
+  request: application/json
+  response: application/json
+  file_upload: multipart/form-data
+  file_upload_operation: POST /abx/api/external-functions/extract-faces-from-image
+pagination:
+  style: offset-limit
+  params:
+  - name: offset
+    example: '0'
+  - name: limit
+    example: '10'
+  - name: sortOrder
+    example: desc
+  observed_on: GET /bt/api/roles
+  response_fields: not-documented-publicly
+  note: >-
+    Query-string offset/limit paging with a sortOrder parameter, observed on the OnWatch roles
+    listing in the Python sample. The response envelope shape is not visible in the sample.
+identifiers:
+  style: uuid
+  example_field: memberGroups
+  note: >-
+    Member groups are referenced by UUID (the sample carries a DEFAULT_GROUP_ID constant). Records
+    returned by the face-extraction operation are consumed opaquely as `items[]` feature objects and
+    passed straight into the member-creation payload.
+idempotency:
+  supported: not-documented-publicly
+  header: null
+  note: >-
+    No idempotency key, no request-id header, and no retry contract appears anywhere in the public
+    sample code or the public site. No Idempotency pointer is emitted for this provider.
+request_tracing:
+  request_id_header: not-documented-publicly
+rate_limiting:
+  signalled: not-documented-publicly
+versioning:
+  scheme: product-release
+  note: >-
+    Versioning tracks the shipped product release rather than the URL. The sample repository is
+    organised by product version — OnAccess/1.1.0, OnWatch/2.3.1, OnWatch/2.5.0 — and the base paths
+    carry no version segment. An integration is written against the version of the appliance the
+    customer has deployed.
+  artifact: lifecycle/anyvision-lifecycle.yml
+errors:
+  envelope: not-documented-publicly
+  problem_json: false
+  note: >-
+    No error catalogue or error envelope is published. No errors/ artifact was written rather than
+    invent one. The 2.3.1 sample only logs Socket.IO transport errors (connect_error,
+    connect_timeout, reconnect_error, reconnect_failed, error, disconnect).
+events:
+  transport: socket.io
+  artifact: asyncapi/anyvision-onwatch-events.yml
+transport_security:
+  tls_verification_disabled_in_samples: true
+  note: See authentication/anyvision-authentication.yml transport_security_warning.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnWatch/2.5.0/python/example-code-login-socket.py
+    status: 200
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnAccess/1.1.0/js/createMember.js
+    status: 200
+  - url: https://api.github.com/repos/AnyVisionltd/oosto-api-sample-code/git/trees/HEAD?recursive=1
+    status: 200

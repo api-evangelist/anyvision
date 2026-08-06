@@ -1,0 +1,36 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/AnyVisionltd
+notes: >-
+  AnyVision publishes a first-party React design system to npm under the @anyvision scope. These are
+  console/application UI building blocks for the company's own products, not embeddable API surfaces
+  a customer drops into their own page (the way a payments provider ships a hosted card element).
+  Recorded here for completeness and marked embeddable: false. Last released 2022-04-04; no updates
+  under the Oosto brand or after the Metropolis acquisition.
+families:
+- name: AnyVision Design System
+  kind: react-component-library
+  embeddable: false
+  loader: npm
+  components:
+  - package: '@anyvision/anv-ui-components'
+    role: React component library
+    url: https://github.com/AnyVisionltd/anv-ui-components
+  - package: '@anyvision/anv-icons'
+    role: Icon set
+    url: https://github.com/AnyVisionltd/anv-icons
+  - package: '@anyvision/style-guide'
+    role: Style guide / design tokens
+    url: https://github.com/AnyVisionltd/anv-ui-style-guide
+hosted_surfaces:
+- name: Oosto Vision AI Appliance
+  kind: hardware-appliance
+  url: https://oosto.com/visionai-appliance/
+  note: Edge appliance, not a client-side component.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://api.github.com/orgs/AnyVisionltd/repos
+    status: 200
+  - url: https://registry.npmjs.org/@anyvision/anv-ui-components
+    status: 200

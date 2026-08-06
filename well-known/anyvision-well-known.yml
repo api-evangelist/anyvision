@@ -1,0 +1,115 @@
+generated: '2026-08-06'
+method: probed
+source: live HTTP probes
+notes: >-
+  No /.well-known/ document is published on any AnyVision/Oosto host. IMPORTANT SOFT-404 WARNING:
+  knowledge.oosto.com (WordPress) answers HTTP 200 with the same ~65KB HTML shell for EVERY path,
+  including every /.well-known/* path, /llms.txt, /openapi.json and /swagger.json. Those 200s are NOT
+  evidence of a document and were verified against a control path — all bodies are byte-similar
+  WordPress HTML with <title>Oosto Knowledge Base</title> and content-type text/html. They are
+  recorded below as soft_404: true and award nothing. oosto.com returns honest 404s.
+  No files were saved because nothing real was served.
+hosts:
+- host: https://oosto.com
+  soft_404: false
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+- host: https://knowledge.oosto.com
+  soft_404: true
+  soft_404_note: >-
+    Every probed path returned 200 text/html with the WordPress knowledge-base shell. Treated as
+    absent. Do not credit any of these.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /llms.txt
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /openapi.json
+    status: 200
+    content_type: text/html
+    real: false
+  - path: /swagger.json
+    status: 200
+    content_type: text/html
+    real: false
+- host: https://kong.tls.ai
+  note: >-
+    The placeholder server host used in the vendor's published OnWatch/OnAccess sample code. Does not
+    resolve from the public internet (curl exit 6, DNS failure), consistent with an on-premise
+    per-customer deployment model. No probes possible.
+  documents: []
+agent_card:
+  found: false
+  paths_probed:
+  - /.well-known/agent-card.json
+  - /.well-known/agent.json
+  hosts_probed:
+  - oosto.com
+  - knowledge.oosto.com
+  result: >-
+    404 on oosto.com; soft-404 HTML on knowledge.oosto.com. No a2a/ artifact was written — an agent
+    card is search-only and must never be authored on a provider's behalf.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://oosto.com/.well-known/security.txt
+    status: 404
+  - url: https://oosto.com/.well-known/agent-card.json
+    status: 404
+  - url: https://knowledge.oosto.com/.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    verdict: soft-404

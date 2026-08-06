@@ -42,5 +42,34 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AnyVision is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
+AnyVision Interactive Technologies is an Israeli computer-vision company that rebranded as **Oosto** in
+October 2021 and was acquired by **Metropolis Technologies** in January 2025 for USD 125M. It builds
+real-time facial recognition and video analytics ("Vision AI") for physical security and access
+control, sold as three products: **Oosto OnWatch** (real-time watchlist alerting and person-of-interest
+monitoring against live camera feeds), **Oosto OnAccess** (touchless facial access control, tailgating
+detection, visitor management), and **Oosto Protect** (cloud alerting). The platform is deployed on
+premises, at the edge on a Vision AI Appliance, on smart cameras via embedded SDKs, or in the cloud,
+and integrates with third-party VMS and access-control systems including Milestone, Genetec and
+Honeywell.
+
+## API surface
+
+There is **no public, vendor-hosted API**. Both product APIs ship with the customer's own on-premise
+installation, and the reference documentation sits behind an email one-time-password login at
+`knowledge.oosto.com`. No OpenAPI, AsyncAPI, GraphQL SDL, MCP server or A2A agent card is published on
+any Oosto host. The operations recorded in this profile were recovered from the vendor's own **public
+sample code** at [AnyVisionltd/oosto-api-sample-code](https://github.com/AnyVisionltd/oosto-api-sample-code):
+
+- **Oosto OnWatch** — REST + Socket.IO under `/bt/api`; bearer JWT from `POST /bt/api/login` (with a
+  `POST /bt/api/eula` acknowledgement gate), offset/limit paged reads, and a `track:created` detection
+  event stream on `/bt/api/socket.io`.
+- **Oosto OnAccess** — REST under `/abx/api`; bearer JWT login, multipart face-feature extraction at
+  `POST /abx/api/external-functions/extract-faces-from-image`, and member enrolment at
+  `POST /abx/api/members`.
+
+## Links
+
+- https://oosto.com/
+- https://github.com/AnyVisionltd
+- https://knowledge.oosto.com/docs (login required)
 - https://forgeglobal.com/anyvision_stock/

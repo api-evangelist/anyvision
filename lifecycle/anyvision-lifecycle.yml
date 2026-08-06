@@ -1,0 +1,74 @@
+generated: '2026-08-06'
+method: searched
+source: https://oosto.com/
+notes: >-
+  AnyVision/Oosto publishes no API versioning policy, no deprecation policy, no SLA and no status
+  page. Versioning is observable only indirectly, through the product-release directories in the
+  vendor's public sample-code repository. No StatusPage or Deprecation pointer is emitted because
+  neither exists — emitting them would be false credit.
+corporate_lifecycle:
+  founded_as: AnyVision Interactive Technologies
+  rebranded_to: Oosto
+  rebrand_date: '2021-10'
+  rebrand_source: https://oosto.com/press/anyvision-now-oosto/
+  acquired_by: Metropolis Technologies
+  acquisition_date: '2025-01'
+  acquisition_price_usd: 125000000
+  total_raised_usd: 352000000
+  status: operating as Oosto under Metropolis
+  note: >-
+    The brand "AnyVision" is retired; anyvision.co 301s to oosto.com. Public pages now carry an
+    "Oosto (now Metropolis)" attribution. The site remains live and maintained — the page sitemap was
+    last modified 2026-08-05.
+versioning:
+  scheme: product-release
+  current:
+    OnWatch: 2.5.0
+    OnAccess: 1.1.0
+  in_url: false
+  policy_url: null
+  source: https://github.com/AnyVisionltd/oosto-api-sample-code
+  note: >-
+    Versions observed from the sample-code directory layout (OnWatch/2.3.1, OnWatch/2.5.0,
+    OnAccess/1.1.0). These are the versions the vendor last published samples for (repo last pushed
+    2022-03-22), not necessarily the current shipping release.
+deprecation:
+  policy_url: null
+  sunset_header: not-documented-publicly
+  documented: false
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    Not applicable in the usual sense — the software runs in the customer's own environment, so
+    availability is the customer's, not a vendor-hosted uptime commitment.
+status_page: null
+status_page_probes:
+- url: https://status.oosto.com/
+  status: 0
+  note: does not resolve
+- url: https://oosto.com/status/
+  status: 404
+changelog:
+  url: null
+  candidate: https://oosto.com/whats-new/
+  candidate_note: >-
+    /whats-new/ is a marketing announcement page for platform capabilities — no version numbers, no
+    dates, no per-release entries. It is not a changelog and no ChangeLog pointer is emitted for it.
+support:
+  url: https://oosto.com/support/
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://status.oosto.com/
+    status: 0
+  - url: https://oosto.com/status/
+    status: 404
+  - url: https://oosto.com/whats-new/
+    status: 200
+  - url: https://anyvision.co/
+    status: 200
+    redirects_to: https://oosto.com/
+  - url: https://api.github.com/repos/AnyVisionltd/oosto-api-sample-code/git/trees/HEAD?recursive=1
+    status: 200

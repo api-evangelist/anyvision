@@ -1,0 +1,82 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/AnyVisionltd/oosto-api-sample-code
+docs: https://knowledge.oosto.com/docs
+docs_access: gated
+docs_note: >-
+  The Oosto knowledge base is the only reference documentation and it 302s to an email one-time-password
+  login (https://knowledge.oosto.com/login/?redirect_to=%2Fdocs). This profile is therefore derived
+  from the vendor's own PUBLIC sample code on GitHub, not from a published OpenAPI — no securityScheme
+  objects exist to aggregate, so derive-authentication.py produced nothing and this file was written
+  by hand from observed, first-party published code.
+summary:
+  types:
+  - http
+  bearer_format: JWT
+  api_key_in: []
+  oauth2_flows: []
+  oauth2: false
+  openid_connect: false
+  mtls: false
+  mfa: not-documented-publicly
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    Both products issue a bearer token from a username/password login and expect it on subsequent
+    requests as `Authorization: Bearer <token>`. There is no public OAuth 2.0 authorization server,
+    no scope surface, and no API-key issuance documented publicly — which is why no scopes/ artifact
+    was written for this provider.
+  applies_to:
+  - Oosto OnWatch API
+  - Oosto OnAccess API
+  sources:
+  - https://github.com/AnyVisionltd/oosto-api-sample-code
+flows:
+- api: Oosto OnWatch API
+  base_path: /bt/api
+  steps:
+  - operation: POST /bt/api/login
+    body: '{ "username": "...", "password": "..." }'
+    returns: '{ "token": "...", "isEulaConfirmed": true|false }'
+  - operation: POST /bt/api/eula
+    body: '{ "username": "...", "password": "..." }'
+    note: >-
+      Required once per user when isEulaConfirmed is false. The login must then be repeated to obtain
+      a usable token. This EULA gate is unusual and worth noting — a first-time integration cannot
+      authenticate until the end-user licence has been acknowledged over the API.
+  - operation: Authorization header
+    value: 'Authorization: Bearer <token>'
+  - operation: Socket.IO handshake
+    note: >-
+      The same token is passed as a `token` query parameter on the Socket.IO connection to
+      /bt/api/socket.io rather than in a header.
+- api: Oosto OnAccess API
+  base_path: /abx/api
+  steps:
+  - operation: POST /abx/api/login
+    body: '{ "username": "...", "password": "..." }'
+    returns: '{ "token": "..." }'
+  - operation: Authorization header
+    value: 'Authorization: Bearer <token>'
+transport_security_warning: >-
+  Every published sample disables TLS verification — the JS samples set
+  `NODE_TLS_REJECT_UNAUTHORIZED = 0` / `rejectUnauthorized: false` and the Python sample passes
+  `verify=False`. The 2.3.1 README acknowledges this: "Please take notice this not a secure way and
+  it's not recommended to work this way outside the development environment." This reflects the
+  on-premise deployment model (self-signed certificates on customer servers) and is recorded as an
+  observation about the published sample code, not as a finding about a production deployment.
+x-evidence:
+  fetched: '2026-08-06'
+  urls:
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnWatch/2.5.0/js/exmaple-code-login-socket.js
+    status: 200
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnWatch/2.5.0/python/example-code-login-socket.py
+    status: 200
+  - url: https://raw.githubusercontent.com/AnyVisionltd/oosto-api-sample-code/master/OnAccess/1.1.0/js/createMember.js
+    status: 200
+  - url: https://knowledge.oosto.com/docs
+    status: 302
+    redirect_to: https://knowledge.oosto.com/login/?redirect_to=%2Fdocs

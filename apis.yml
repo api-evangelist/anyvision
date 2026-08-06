@@ -1,18 +1,97 @@
 aid: anyvision
 name: AnyVision
-description: 'AnyVision is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  AnyVision Interactive Technologies is an Israeli computer-vision company that rebranded as Oosto in
+  October 2021 and was acquired by Metropolis Technologies in January 2025 for USD 125M. It builds
+  real-time facial recognition and video analytics ("Vision AI") for physical security and access
+  control, sold as three products: Oosto OnWatch (real-time watchlist alerting and person-of-interest
+  monitoring against live camera feeds), Oosto OnAccess (touchless facial access control, tailgating
+  detection, visitor management), and Oosto Protect (cloud alerting). The platform is deployed on
+  premises, at the edge on a Vision AI Appliance, on smart cameras via embedded SDKs, or in the cloud,
+  and integrates with third-party VMS and access-control systems including Milestone, Genetec and
+  Honeywell. Its APIs are per-deployment REST + Socket.IO surfaces shipped with the customer's own
+  installation, documented in a login-gated knowledge base, with public sample code on GitHub.
+image: https://oosto.com/wp-content/uploads/2024/04/oosto-home-social.png
 url: https://raw.githubusercontent.com/api-evangelist/anyvision/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-06'
 modified: '2026-08-06'
 tags:
+- facial-recognition
+- computer-vision
+- video-analytics
+- physical-security
+- access-control
+- biometrics
+- surveillance
+- edge-ai
+- watchlist-alerting
+- visitor-management
+- israel
 - Company
-apis: []
+apis:
+- name: Oosto OnWatch API
+  description: >-
+    Per-deployment REST API and Socket.IO event stream for Oosto OnWatch, the real-time watchlist
+    alerting and person-of-interest monitoring product. Served from the customer's own OnWatch server
+    under the /bt/api base path (the product's internal codename is "Better Tomorrow"). Authentication
+    is username/password exchanged for a bearer JWT at POST /bt/api/login, with an end-user licence
+    acknowledgement step at POST /bt/api/eula. Administrative resources such as roles are read over
+    REST with offset/limit/sortOrder paging, and detection events are consumed by connecting a
+    Socket.IO client to the /bt/api/socket.io path with the token supplied as a query parameter,
+    receiving track:created events as subjects are matched. There is no vendor-hosted multi-tenant
+    base URL — every deployment resolves to the customer's own server IP or DNS name, so no public
+    baseURL is recorded here. The reference documentation is behind an OTP login at
+    knowledge.oosto.com; the operations recorded in this profile are taken from the vendor's own
+    public sample code on GitHub.
+  humanURL: https://github.com/AnyVisionltd/oosto-api-sample-code/tree/master/OnWatch
+  tags:
+  - facial-recognition
+  - video-analytics
+  - watchlist-alerting
+  - physical-security
+  - real-time-events
+  properties:
+  - type: SourceCode
+    url: https://github.com/AnyVisionltd/oosto-api-sample-code
+  - type: Documentation
+    url: https://knowledge.oosto.com/docs
+  - type: Webhooks
+    url: asyncapi/anyvision-onwatch-events.yml
+  - type: Authentication
+    url: authentication/anyvision-authentication.yml
+  - type: Conventions
+    url: conventions/anyvision-conventions.yml
+- name: Oosto OnAccess API
+  description: >-
+    Per-deployment REST API for Oosto OnAccess, the facial access-control product (internal codename
+    "Abraxas"), served from the customer's own OnAccess server under the /abx/api base path.
+    Authentication is username/password exchanged for a bearer JWT at POST /abx/api/login. The
+    enrolment flow published in the vendor's sample code posts an image as multipart/form-data to
+    POST /abx/api/external-functions/extract-faces-from-image to extract face feature vectors, then
+    creates the person record with POST /abx/api/members, carrying the extracted image features plus
+    identity fields (name, email, phone, description), access-card credentials (card id + facility
+    code) and member-group membership by UUID. As with OnWatch there is no vendor-hosted base URL —
+    the API ships with the customer's installation. Reference documentation is behind an OTP login at
+    knowledge.oosto.com; operations recorded here come from the vendor's public sample code.
+  humanURL: https://github.com/AnyVisionltd/oosto-api-sample-code/tree/master/OnAccess
+  tags:
+  - facial-recognition
+  - access-control
+  - biometrics
+  - visitor-management
+  - physical-security
+  properties:
+  - type: SourceCode
+    url: https://github.com/AnyVisionltd/oosto-api-sample-code
+  - type: Documentation
+    url: https://knowledge.oosto.com/docs
+  - type: Authentication
+    url: authentication/anyvision-authentication.yml
+  - type: Conventions
+    url: conventions/anyvision-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +99,70 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://oosto.com/
+- type: Documentation
+  url: https://knowledge.oosto.com/docs
+- type: Support
+  url: https://oosto.com/support/
+- type: Blog
+  url: https://oosto.com/blog/
+- type: BlogRSS
+  url: https://oosto.com/feed/
+- type: GitHubOrganization
+  url: https://github.com/AnyVisionltd
+- type: SignUp
+  url: https://oosto.com/demo/
+- type: TermsOfService
+  url: https://oosto.com/terms/
+- type: PrivacyPolicy
+  url: https://oosto.com/privacy/
+- type: Partners
+  url: https://oosto.com/partners/
+- type: Press
+  url: https://oosto.com/press/
+- type: Packages
+  url: packages/anyvision-packages.yml
+- type: Components
+  url: components/anyvision-components.yml
+- type: WellKnown
+  url: well-known/anyvision-well-known.yml
+- type: Authentication
+  url: authentication/anyvision-authentication.yml
+- type: Conventions
+  url: conventions/anyvision-conventions.yml
+- type: Webhooks
+  url: asyncapi/anyvision-onwatch-events.yml
+- type: Conformance
+  url: conformance/anyvision-conformance.yml
+- type: Compliance
+  url: https://oosto.com/why-trust-us/
+- type: Lifecycle
+  url: lifecycle/anyvision-lifecycle.yml
+- type: DomainSecurity
+  url: security/anyvision-domain-security.yml
+- type: LLMsTxt
+  url: llms/anyvision-llms.txt
+- type: Forge
   url: https://forgeglobal.com/anyvision_stock/
+x-enrichment:
+  date: '2026-08-06'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Surface recovered despite a gate — the Oosto knowledge base is the only reference documentation
+    and https://knowledge.oosto.com/docs 302s to an email one-time-password login, and no OpenAPI,
+    AsyncAPI or GraphQL SDL is published on any host; the OnWatch (/bt/api) and OnAccess (/abx/api)
+    operations recorded in this profile were recovered from the vendor's own public sample-code
+    repository at github.com/AnyVisionltd/oosto-api-sample-code.
+  evidence:
+  - url: https://knowledge.oosto.com/docs
+    status: 302
+  - url: https://oosto.com/openapi.json
+    status: 404
+  - url: https://github.com/AnyVisionltd/oosto-api-sample-code
+    status: 200
+  checked: '2026-08-06'
