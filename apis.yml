@@ -11,6 +11,17 @@ description: >-
   and integrates with third-party VMS and access-control systems including Milestone, Genetec and
   Honeywell. Its APIs are per-deployment REST + Socket.IO surfaces shipped with the customer's own
   installation, documented in a login-gated knowledge base, with public sample code on GitHub.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://oosto.com/wp-content/uploads/2024/04/oosto-home-social.png
 url: https://raw.githubusercontent.com/api-evangelist/anyvision/refs/heads/main/apis.yml
 x-type: company
