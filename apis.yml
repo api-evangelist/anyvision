@@ -30,17 +30,17 @@ specificationVersion: '0.23'
 created: '2026-08-06'
 modified: '2026-08-06'
 tags:
-- Facial Recognition
-- Computer-Vision
-- Video Analytics
-- Physical Security
-- Access Control
-- Biometrics
-- Surveillance
-- Edge AI
+- facial-recognition
+- computer-vision
+- video-analytics
+- physical-security
+- access-control
+- biometrics
+- surveillance
+- edge-ai
 - watchlist-alerting
-- Visitor Management
-- Israel
+- visitor-management
+- israel
 - Company
 tags_raw:
 - facial-recognition
@@ -72,11 +72,11 @@ apis:
     public sample code on GitHub.
   humanURL: https://github.com/AnyVisionltd/oosto-api-sample-code/tree/master/OnWatch
   tags:
-  - Facial Recognition
-  - Video Analytics
+  - facial-recognition
+  - video-analytics
   - watchlist-alerting
-  - Physical Security
-  - Real-Time Events
+  - physical-security
+  - real-time-events
   tags_raw:
   - facial-recognition
   - video-analytics
@@ -108,11 +108,11 @@ apis:
     knowledge.oosto.com; operations recorded here come from the vendor's public sample code.
   humanURL: https://github.com/AnyVisionltd/oosto-api-sample-code/tree/master/OnAccess
   tags:
-  - Facial Recognition
-  - Access Control
-  - Biometrics
-  - Visitor Management
-  - Physical Security
+  - facial-recognition
+  - access-control
+  - biometrics
+  - visitor-management
+  - physical-security
   tags_raw:
   - facial-recognition
   - access-control
